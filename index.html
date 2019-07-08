@@ -61,7 +61,7 @@
             }
         }
 
-        function remove_all_points() {
+        function removeAllPoints() {
             var features = map.getLayers();
             var i = 1;
             features.forEach((feature) =>{
@@ -115,8 +115,9 @@
             });
             map.addLayer(vectorLayer);
             map.on('click', function(e) {
+                var mapLayers = map.getLayers();
                 var iconFeatureA = map.getFeaturesAtPixel(e.pixel);
-                if (iconFeatureA !== null) {
+                if (iconFeatureA !== null && !mapLayers.contains(iconFeatureA)) {
                     var adres = iconFeatureA[0].get("atsis");
                     alert(adres);
                     e.preventDefault(); // avoid bubbling
