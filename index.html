@@ -25,11 +25,14 @@ input[type="text"] {
   $( function() {
     $( "#slider-range" ).slider({
       range: true,
-      min: 1880,
-      max: 2017,
-      values: [ 1900, 2000 ],
+      min: 1934,
+      max: 2019,
+      values: [ 1934, 2019 ],
       slide: function( event, ui ) {
-        $( "#amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ] ); add_map_point(31.2631254 ,34.802250941657);add_map_point(31.8110615 ,34.7816055);remove_all_points();
+        $( "#amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ] ); 
+        if (jsonfile == undefined){
+            return;
+        }
       }
     });
     $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +"-"+
@@ -50,8 +53,7 @@ function remove_all_points() {
     });
 }
 /* OSM & OL example code provided by https://mediarealm.com.au/ */
-jQuery.getJSON("data.json");
-console.log("asa");
+jQuery.getJSON("places_with_data_and_lon_lat.json");
 var map;
 var last;
 var vectorLayer
@@ -96,7 +98,7 @@ map.addLayer(vectorLayer);
   <script type="text/javascript" charset="utf-8">
   var jsonfile;
     $.get(
-    "data.json",
+    "places_with_data_and_lon_lat.json",
     {paramOne : 1, paramX : 'abc'},
     function(data) {
 	jsonfile = (' ' + JSON.stringify(data)).slice(1);
