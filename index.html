@@ -124,6 +124,15 @@
                 }
             });
         }
+        map.on('click', function(e) {
+                var iconFeatureA = map.getFeaturesAtPixel(e.pixel);
+                if (iconFeatureA) {
+                    alert(iconFeatureA);
+                    var place = iconFeatureA[0].get("place");
+                    alert(place);
+                    e.preventDefault(); // avoid bubbling
+                }
+            });
     </script>
     <script type="text/javascript" charset="utf-8">
         var jsonfile;
