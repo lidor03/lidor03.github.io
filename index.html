@@ -98,6 +98,7 @@ map.addLayer(vectorLayer);
     {paramOne : 1, paramX : 'abc'},
     function(data) {
        jsonfile:JSON.stringify(data);
+	    document.write(jsonfile);
     }
 );
 </script>
@@ -109,6 +110,6 @@ map.addLayer(vectorLayer);
   <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold; width:350px">
 </p>
 <div id="slider-range" style="width:350px"></div>
-<script>document.write(jsonfile)</script>
+<script>document.write(jsonfile);</script>
 </body>
 </html>
