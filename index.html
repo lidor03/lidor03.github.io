@@ -98,13 +98,14 @@ map.addLayer(vectorLayer);
     {paramOne : 1, paramX : 'abc'},
     function(data) {
 	jsonfile = (' ' + JSON.stringify(data)).slice(1);
-	document.write(jsonfile);
+	initialize_map();
+	add_map_point(31.68989 ,34.89898);
 	
     }
 );
 </script>
 </head>
-<body onload="initialize_map();add_map_point(31.68989 ,34.89898);">
+<body>
   <div id="map" style="width: 1200px; height: 650px;"></div>
 <p>
   <label for="amount">טווח שנים:</label>
