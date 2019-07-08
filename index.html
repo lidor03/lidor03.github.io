@@ -114,14 +114,6 @@
                 })
             });
             map.addLayer(vectorLayer);
-            map.on('click', function(e) {
-                var iconFeatureA = map.getFeaturesAtPixel(e.pixel);
-                if (iconFeatureA) {
-                    alert(iconFeatureA);
-                    var place = iconFeatureA[0].get("place");
-                    alert(place);
-                    e.preventDefault(); // avoid bubbling
-                }
             });
         }
         map.on('click', function(e) {
