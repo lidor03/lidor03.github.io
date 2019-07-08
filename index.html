@@ -116,7 +116,7 @@
             map.addLayer(vectorLayer);
             map.on('click', function(e) {
                 var iconFeatureA = map.getFeaturesAtPixel(e.pixel);
-                if (iconFeatureA !== null) {
+                if (iconFeatureA !== null && iconFeatureA[0].getKeys().includes("place")) {
                     var place = iconFeatureA[0].get("place");
                     alert(place);
                     e.preventDefault(); // avoid bubbling
