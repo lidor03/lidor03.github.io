@@ -13,18 +13,16 @@
         }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" 
-type="text/css">
-    <script src="https://openlayers.org/en/v4.6.5/build/ol.js" 
-type="text/javascript"></script>
-    <link rel="stylesheet" 
-href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="http://resources/demos/style.css">
-    <link rel="stylesheet" 
-href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="//resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js" ></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
     <script>
         $( function() {
             $( "#slider-range" ).slider({
@@ -54,12 +52,10 @@ href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         function addPlacesToMap (lower, upper){
             var keys = Object.keys(json);
             for (var i = 0; i < keys.length; i++) {
-                if(json[keys[i]]["year"] >= lower && json[keys[i]]["year"] <= 
-upper){
+                if(json[keys[i]]["year"] >= lower && json[keys[i]]["year"] <= upper){
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
-                        add_map_point(places[j]["latitude"], 
-places[j]["longitude"]);
+                        add_map_point(places[j]["latitude"], places[j]["longitude"]);
                     }
                 }
             }
@@ -89,8 +85,7 @@ places[j]["longitude"]);
                 layers: [
                     new ol.layer.Tile({
                         source: new ol.source.OSM({
-                            url: 
-"https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            url: "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         })
                     })
                 ],
@@ -104,9 +99,9 @@ places[j]["longitude"]);
             vectorLayer = new ol.layer.Vector({
                 source:new ol.source.Vector({
                     features: [new ol.Feature({
-                        geometry: new 
-ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)], 'EPSG:4326', 
-'EPSG:3857')),
+                        geometry: new ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)],
+                            'EPSG:4326', 'EPSG:3857')),
+                        atsis: 7,
                     })]
                 }),
                 style: new ol.style.Style({
@@ -114,8 +109,7 @@ ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)], 'EPSG:4326',
                         anchor: [0.2, 0.2],
                         anchorXUnits: "fraction",
                         anchorYUnits: "fraction",
-                        src: 
-"https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
+                        src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
                     })
                 })
             });
@@ -139,8 +133,7 @@ ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)], 'EPSG:4326',
 <div id="map" style="width: 1200px; height: 650px;"></div>
 <p>
     <label for="amount">טווח שנים:</label>
-    <input type="text" id="amount" readonly style="border:0; color:#f6931f; 
-font-weight:bold; width:350px">
+    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold; width:350px">
 </p>
 <div id="slider-range" style="width:350px"></div>
 </body>
