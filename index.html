@@ -91,6 +91,14 @@
                     zoom: mapDefaultZoom
                 })
             });
+            map.on('click', function(e) {
+                var iconFeatureA = map.getFeaturesAtPixel(e.pixel);
+                if (iconFeatureA !== null && iconFeatureA[0].getKeys().includes("place")) {
+                    var place = iconFeatureA[0].get("place");
+                    alert(place);
+                    e.preventDefault(); // avoid bubbling
+                }
+            });
         }
         function add_map_point(place, lat, lng) {
             vectorLayer = new ol.layer.Vector({
@@ -111,14 +119,6 @@
                 })
             });
             map.addLayer(vectorLayer);
-            map.on('click', function(e) {
-                var iconFeatureA = map.getFeaturesAtPixel(e.pixel);
-                if (iconFeatureA !== null && iconFeatureA[0].getKeys().includes("place")) {
-                    var place = iconFeatureA[0].get("place");
-                    alert(place);
-                    e.preventDefault(); // avoid bubbling
-                }
-            });
         }
     </script>
     <script type="text/javascript" charset="utf-8">
