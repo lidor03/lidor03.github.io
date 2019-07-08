@@ -97,8 +97,7 @@ map.addLayer(vectorLayer);
     "data.json",
     {paramOne : 1, paramX : 'abc'},
     function(data) {
-       jsonfile:JSON.stringify(data);
-	    document.write(JSON.stringify(data));
+	jsonfile = (' ' + JSON.stringify(data)).slice(1);
     }
 );
 </script>
