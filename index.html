@@ -55,7 +55,7 @@
                 if(json[keys[i]]["year"] >= lower && json[keys[i]]["year"] <= upper){
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
-                        add_map_point(places[j]["latitude"], places[j]["longitude"]);
+                        add_map_point(places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
                     }
                 }
             }
@@ -95,13 +95,13 @@
                 })
             });
         }
-        function add_map_point(lat, lng) {
+        function add_map_point(place, lat, lng) {
             vectorLayer = new ol.layer.Vector({
                 source:new ol.source.Vector({
                     features: [new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)],
                             'EPSG:4326', 'EPSG:3857')),
-                        atsis: 7,
+                        place: place,
                     })]
                 }),
                 style: new ol.style.Style({
@@ -115,11 +115,10 @@
             });
             map.addLayer(vectorLayer);
             map.on('click', function(e) {
-                var mapLayers = map.getLayers();
                 var iconFeatureA = map.getFeaturesAtPixel(e.pixel);
-                if (iconFeatureA !== null && !mapLayers.contains(iconFeatureA)) {
-                    var adres = iconFeatureA[0].get("atsis");
-                    alert(adres);
+                if (iconFeatureA !== null) {
+                    var place = iconFeatureA[0].get("place");
+                    alert(place);
                     e.preventDefault(); // avoid bubbling
                 }
             });
