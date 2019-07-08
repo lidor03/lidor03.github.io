@@ -91,18 +91,6 @@ src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
 
 map.addLayer(vectorLayer);
 }
-
-var txt = '12345';
-var xmlhttp = new XMLHttpRequest();
-document.write("hreeee");
-xmlhttp.onreadystatechange = function(){
-  if(xmlhttp.status == 200 && xmlhttp.readyState == 4){
-    txt = xmlhttp.responseText;
-  }
-};
-xmlhttp.open("GET","kineret.org.il",true);
-xmlhttp.send();
-document.write(txt);
   </script>
   <script type="text/javascript" charset="utf-8">
     $.get(
