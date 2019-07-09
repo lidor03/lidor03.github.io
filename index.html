@@ -199,7 +199,7 @@
         }
         function remove_all_points() {
             var features = map.getLayers();
-            for (i = 1; i < features.getLengt(); i++) { 
+            for (i = 1; i < features.getLength(); i++) { 
                   if(features.get(i).getSource().getFeatures().length==0){
                       features.remove(features.get(i));
                   }
@@ -212,7 +212,7 @@
         }
         function removeZeroPoints() {
             var features = map.getLayers();
-            for (i = 1; i < features.getLengt(); i++) { 
+            for (i = 1; i < features.getLength(); i++) { 
                   if(features.get(i).getSource().getFeatures().length==0){
                       features.remove(features.get(i));
                   }
