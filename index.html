@@ -265,11 +265,13 @@
                     else{
                         otherPlacesStr = "אין מקומות נוספים.";
                     }
-                    var htmlStr = " <img src=\"" + albumPhoto + "\" alt=\"תמונת האלבום\">" + "</br>" +
+                    var htmlStr = " <img src=\"" + albumPhoto + "\" alt=\"תמונת האלבום\" width=\"300\" height=\"300\">" + "</br>" +
                         "<b> שם האמן: </b>" + artist + "</br>"
                         + "<b> שם השיר: </b>" + songName + "</br>"
                         + "<b> מקום: </b>" + place + "</br>" + "<b> מקומות נוספים המוזכרים בשיר: </b>" + otherPlacesStr
-                        + "</br>";
+                        + "</br>" + "<b> שנת פרסום: </b>";
+                    year == 0 ? htmlStr += "לא ידועה" : htmlStr+= year;
+                    htmlStr += "</br>";
                     if (preview_url != null){
                         document.getElementById("songdata").innerHTML = htmlStr;
                         alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + " " + otherPlacesStr);
@@ -339,7 +341,7 @@
     </label>
     <label>שירים ששנת יצירתם לא ידועה</label>
 </div>
-<div class="rightdiv" id="songdata" style="text-align: right">
+<div class="rightdiv" id="songdata" style="text-align: right" dir="rtl">
 </div>
 </body>
 </html>
