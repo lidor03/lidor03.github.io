@@ -90,12 +90,11 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'שם המקום');
             data.addColumn('number', 'כמות מופעים');
-            // var arr = getOccurrencesByYears(lower, upper);
-            var arr = getOccurrencesAllYears();
+            var arr = getOccurrencesByYears(lower, upper);
             data.addRows(arr);
 
             // Set chart options
-            var options = {'title': 'הערים הכי מוזכרות בכל השנים ',
+            var options = {'title': 'הערים הכי מוזכרות בשנים ' + lower + "-" + upper,
                 'width':800,
                 'height':600,
                 'rtlTable': true};
