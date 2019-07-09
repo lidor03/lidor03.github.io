@@ -141,7 +141,7 @@ input:checked + .slider:before {
                 if(json[keys[i]]["year"] >= lower && json[keys[i]]["year"] <= upper){
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
-                        add_map_point(places[j]["year"],places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
+                        add_map_point(json[keys[i]]["year"],places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
                     }
                 }
             }
@@ -153,7 +153,7 @@ input:checked + .slider:before {
                 if(json[keys[i]]["year"] == 0){
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
-                        add_map_point(places[j]["year"],places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
+                        add_map_point(json[keys[i]]["year"],places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
                     }
                 }
             }
