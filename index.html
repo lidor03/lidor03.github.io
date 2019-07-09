@@ -202,7 +202,7 @@
             var i = 1;
             var item;
             features.forEach((feature) =>{
-                if(feature && features.item(0)!==feature && feature.getSource().getFeatures().getLength()>0 && feature.getSource().getFeatures()[0].get("year") !== 0){
+                if(feature && features.item(0)!==feature && feature.getSource().getFeatures().length>0 && feature.getSource().getFeatures()[0].get("year") !== 0){
                     feature.getSource().clear();
                 }
             });
@@ -212,7 +212,7 @@
             var i = 1;
             var item;
             features.forEach((feature) =>{
-                if(feature && features.item(0)!==feature && feature.getSource().getFeatures().getLength()>0 && feature.getSource().getFeatures()[0].get("year") == 0){
+                if(feature && features.item(0)!==feature && feature.getSource().getFeatures().length>0 && feature.getSource().getFeatures()[0].get("year") == 0){
                     feature.getSource().clear();
                 }
             });
