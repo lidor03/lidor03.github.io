@@ -154,7 +154,7 @@
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
                         var otherPlaces = places.copy();
-                        otherPlaces.removeItem(j);
+                        //otherPlaces.removeItem(j);
                         add_map_point(artist, songName, albumPhoto, preview_url, year,
                             places[j]["place"], places[j]["latitude"], places[j]["longitude"], otherPlaces);
                     }
@@ -182,7 +182,7 @@
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
                         var otherPlaces = places.copy();
-                        otherPlaces.removeItem(j);
+                        //otherPlaces.removeItem(j);
                         add_map_point(artist, songName, albumPhoto, preview_url, json[keys[i]]["year"],
                             places[j]["place"], places[j]["latitude"], places[j]["longitude"], otherPlaces);
                     }
@@ -258,7 +258,7 @@
                     var preview_url = iconFeatureA[0].get("preview_url");
                     var otherPlaces = iconFeatureA[0].get("otherPlaces");
                     if (preview_url != null){
-                        alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + 
+                        alert(songName + " " + artist + " " + place + " " + year + " " + preview_url +
                             " " + otherPlaces.toString());
                     }
                     else {
