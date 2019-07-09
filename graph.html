@@ -33,13 +33,13 @@
         year = 2008;
         for(var i=0; i<json.length; i++){
           if(json[i]["Year"]==year){
-            array.push([json[i]["Place"],json[i]["Occurrences"]]);
+            array.push([json[i]["Place"], json[i]["Occurrences"]]);
           }
         }
-        array.sort(function(a,b){
-         if(a[1]<b[1])
+        array.sort(function(a, b){
+         if(a[1] < b[1])
            return 1;
-          if(a[1]<b[1])
+          if(a[1] > b[1])
            return -1;
           else return 0;
         });
