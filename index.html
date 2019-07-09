@@ -264,11 +264,13 @@
                         otherPlacesStr = "אין מקומות נוספים.";
                     }
                     if (preview_url != null){
-                        document.getElementById("songdata").innerHTML = "<b> שם האמן: </b>" + artist;
+                        document.getElementById("songdata").innerHTML = "<b> שם האמן: </b>" + artist + "</br>" 
+                                                                        + "<b> שם השיר: </b>" + songName + "</br>";
                         alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + " " + otherPlacesStr);
                     }
                     else {
-                        document.getElementById("songdata").innerHTML = "<b> שם האמן: </b>" + artist;
+                        document.getElementById("songdata").innerHTML = "<b> שם האמן: </b>" + artist + "</br>"
+                            + "<b> שם השיר: </b>" + songName + "</br>";
                         alert(songName + " " + artist + " " + place + " " + year  + " " + otherPlacesStr);
                     }
                     e.preventDefault(); // avoid bubbling
@@ -332,7 +334,7 @@
     </label>
     <label>שירים ששנת יצירתם לא ידועה</label>
 </div>
-<div class="rightdiv" id="songdata">
+<div class="rightdiv" id="songdata" style="text-align: right">
 </div>
 </body>
 </html>
