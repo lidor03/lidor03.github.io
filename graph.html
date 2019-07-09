@@ -1,10 +1,10 @@
 <html>
-  <head>
+<head>
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
-    <script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+            <script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="http://resources/demos/style.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -28,47 +28,81 @@
         );
     </script>
     <script>
-      function atsis(){
-       let array = [];
-        year = 2008;
-        for(var i=0; i<json.length; i++){
-          if(json[i]["Year"]==year){
-            array.push([json[i]["Place"], json[i]["Occurrences"]]);
-          }
+        function getOccurrencesByYears(lower, upper){
+            let array = [];
+            for(var i=0; i<json.length; i++){
+                if(json[i]["Year"] >= lower && json[i]["Year"] <= upper){
+                    var found = false;
+                    for (var j = 0; j < array.length; j++){
+                        if (array[j][0] === json[i]["Place"]){
+                            found = true;
+                            (array[j][1]) = (Number)(array[j][1]) + json[i]["Occurrences"];
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        array.push([json[i]["Place"], json[i]["Occurrences"]]);
+                    }
+                }
+            }
+            array.sort(function(a, b){
+                if(a[1] < b[1])
+                    return 1;
+                if(a[1] > b[1])
+                    return -1;
+                else return 0;
+            });
+            return array.slice(0,10)
         }
-        array.sort(function(a, b){
-         if(a[1] < b[1])
-           return 1;
-          if(a[1] > b[1])
-           return -1;
-          else return 0;
-        });
-        return array.slice(0,10) 
-      }
-    
-      function drawChart() {
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        var arr = atsis();
-        data.addRows(arr);
+        function getOccurrencesAllYears(){
+            let array = [];
+            for(var i=0; i<json.length; i++){
+                var found = false;
+                for (var j = 0; j < array.length; j++){
+                    if (array[j][0] === json[i]["Place"]){
+                        found = true;
+                        (array[j][1]) = (Number)(array[j][1]) + json[i]["Occurrences"];
+                        break;
+                    }
+                }
+                if (!found) {
+                    array.push([json[i]["Place"], json[i]["Occurrences"]]);
+                }
+            }
+            array.sort(function(a, b){
+                if(a[1] < b[1])
+                    return 1;
+                if(a[1] > b[1])
+                    return -1;
+                else return 0;
+            });
+            return array.slice(0,10)
+        }
+        
+        function drawChart() {
 
-        // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':800,
-                       'height':600};
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            var arr = getOccurrencesByYears(2008, 2010);
+            data.addRows(arr);
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
+            // Set chart options
+            var options = {'title':'How Much Pizza I Ate Last Night',
+                'width':800,
+                'height':600};
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
     </script>
-  </head>
+</head>
 
-  <body>
-    <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
-  </body>
+<body>
+<!--Div that will hold the pie chart-->
+<div id="chart_div"></div>
+</body>
 </html>
