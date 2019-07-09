@@ -205,7 +205,6 @@
                 if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
                     && feature.getSource().getFeatures()[0].get("year") !== 0){
                     feature.getSource().clear();
-                    features.remove(feature);
                 }
             }
         }
@@ -217,7 +216,6 @@
                 if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
                     && feature.getSource().getFeatures()[0].get("year") == 0){
                     feature.getSource().clear();
-                    features.remove(feature);
                 }
             }
         }
@@ -277,7 +275,7 @@
                     year == 0 ? htmlStr += "לא ידועה" : htmlStr+= year;
                     htmlStr += "</br>" + "<b> האזנה לקדימון: </b>";
                     if (preview_url != null){
-                        htmlStr += "  <audio controls=\"controls\">\n" +
+                        htmlStr += "  <audio controls=\"controls\" style='height: 100%;'>\n" +
                             "    <source src=\"" + preview_url + "\"/>\n" +
                             "  </audio>"
                         document.getElementById("songdata").innerHTML = htmlStr;
