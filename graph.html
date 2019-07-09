@@ -57,7 +57,7 @@
         } );
         
         function getOccurrencesByYears(lower, upper){
-            let array = [];
+            var array = [];
             for(var i=0; i<json.length; i++){
                 if(json[i]["Year"] >= lower && json[i]["Year"] <= upper){
                     var found = false;
