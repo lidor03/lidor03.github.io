@@ -153,8 +153,14 @@
                 if(year >= lower && year <= upper){
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
+                        var otherPlaces = [];
+                        for (var k = 0; k < places.length; k++){
+                            if (k != j){
+                                otherPlaces.push(places[k]);
+                            }
+                        }
                         add_map_point(artist, songName, albumPhoto, preview_url, year,
-                            places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
+                            places[j]["place"], places[j]["latitude"], places[j]["longitude"], otherPlaces);
                     }
                 }
             }
@@ -179,8 +185,14 @@
                     }
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
+                        var otherPlaces = [];
+                        for (var k = 0; k < places.length; k++){
+                            if (k != j){
+                                otherPlaces.push(places[k]);
+                            }
+                        }
                         add_map_point(artist, songName, albumPhoto, preview_url, json[keys[i]]["year"],
-                            places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
+                            places[j]["place"], places[j]["latitude"], places[j]["longitude"], otherPlaces);
                     }
                 }
             }
@@ -252,17 +264,18 @@
                     var albumPhoto = iconFeatureA[0].get("albumPhoto");
                     var year = iconFeatureA[0].get("year");
                     var preview_url = iconFeatureA[0].get("preview_url");
+                    var otherPlaces = iconFeatureA[0].get("otherPlaces").toString();
                     if (preview_url != null){
-                        alert(songName + " " + artist + " " + place + " " + year + " " + preview_url);
+                        alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + " " + otherPlaces);
                     }
                     else {
-                        alert(songName + " " + artist + " " + place + " " + year);
+                        alert(songName + " " + artist + " " + place + " " + year  + " " + otherPlaces);
                     }
                     e.preventDefault(); // avoid bubbling
                 }
             });
         }
-        function add_map_point(artist, songName, albumPhoto, preview_url, year, place, lat, lng) {
+        function add_map_point(artist, songName, albumPhoto, preview_url, year, place, lat, lng, otherPlaces) {
             vectorLayer = new ol.layer.Vector({
                 source:new ol.source.Vector({
                     features: [new ol.Feature({
@@ -273,6 +286,7 @@
                         albumPhoto: albumPhoto,
                         preview_url: preview_url,
                         place: place,
+                        otherPlaces: otherPlaces,
                         year: year,
                     })]
                 }),
