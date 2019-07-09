@@ -273,14 +273,17 @@
                         + "<b> מקום: </b>" + place + "</br>" + "<b> מקומות נוספים המוזכרים בשיר: </b>" + otherPlacesStr
                         + "</br>" + "<b> שנת פרסום: </b>";
                     year == 0 ? htmlStr += "לא ידועה" : htmlStr+= year;
-                    htmlStr += "</br>";
+                    htmlStr += "</br>" + "<b> האזנה לקדימון: </b>";
                     if (preview_url != null){
+                        htmlStr += "</br>" + "  <audio controls=\"controls\">\n" +
+                            "    <source src=\"" + preview_url + "\"/>\n" +
+                            "  </audio>"
                         document.getElementById("songdata").innerHTML = htmlStr;
                         alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + " " + otherPlacesStr);
                     }
                     else {
+                        htmlStr += "קדימון אינו זמין.";
                         document.getElementById("songdata").innerHTML = htmlStr;
-                        alert(songName + " " + artist + " " + place + " " + year  + " " + otherPlacesStr);
                     }
                     e.preventDefault(); // avoid bubbling
                 }
