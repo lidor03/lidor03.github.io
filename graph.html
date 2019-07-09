@@ -33,6 +33,50 @@
         );
     </script>
     <script>
+        function nthlargest(arra,highest){
+    let x = 0;
+    let y = 0;
+    let z = 0;
+    let temp = 0;
+    const tnum = arra.length;
+    let flag = false;
+    let result = false;
+
+    while(x < tnum){
+        y = x + 1; 
+        
+        if(y < tnum){
+            for(z = y; z < tnum; z++){
+                
+                if(arra[x][1] < arra[z][1]){
+                    temp = arra[z];
+                    arra[z] = arra[x];
+                    arra[x] = temp;
+                    flag = true; 
+                }else{
+                    continue;
+                }	
+            }					
+        }
+        
+        if(flag){
+            flag = false;
+        }else{
+            x++; 
+            if(x === highest){ 
+              
+                result = true;
+            }	
+        }
+        if(result){
+            break;
+        }
+    }
+
+    return (arra[(highest - 1)]);
+}
+        
+        
          var lower;
         var upper;
       $( function() {
@@ -73,18 +117,19 @@
                     }
                 }
             }
-            array.sort(function(a, b){
-                if(a[1] < b[1])
-                    return 1;
-                else if(a[1] > b[1])
-                    return -1;
-                else return 0;
-            });
+            arr=[];
             var arrayLength = array.length;
             if (arrayLength < 10){
-                return array.slice(0, arrayLength);
+                for(var i=1;i<=arrayLength:i++){
+               arr[i-1]= nthlargest(array,i);
             }
-            return array.slice(0,10);
+            }
+            else{
+            for(var i=1;i<=10:i++){
+               arr[i-1]= nthlargest(array,i);
+            }
+            }
+            return arr;
         }
 
         function getOccurrencesAllYears(){
