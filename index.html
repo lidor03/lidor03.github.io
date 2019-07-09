@@ -200,18 +200,18 @@
         function remove_all_points() {
             var features = map.getLayers();
             features.forEach((feature) =>{
-                if(feature && features.item(0)!==feature && feature.getSource().getFeatures().length>0 && feature.getSource().getFeatures()[0].get("year") !== 0){
+                if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
+                    && feature.getSource().getFeatures()[0].get("year") !== 0){
                     feature.getSource().clear();
-                    map.removeLayer(feature);
                 }
             });
         }
         function removeZeroPoints() {
             var features = map.getLayers();
             features.forEach((feature) =>{
-                if(feature && features.item(0)!==feature && feature.getSource().getFeatures().length>0 && feature.getSource().getFeatures()[0].get("year") == 0){
+                if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
+                    && feature.getSource().getFeatures()[0].get("year") == 0){
                     feature.getSource().clear();
-                     map.removeLayer(feature);
                 }
             });
         }
@@ -264,6 +264,7 @@
                         otherPlacesStr = "אין מקומות נוספים.";
                     }
                     if (preview_url != null){
+                        document.getElementById("songdata").innerHTML = "Atsis!";
                         alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + " " + otherPlacesStr);
                     }
                     else {
@@ -330,20 +331,7 @@
     </label>
     <label>שירים ששנת יצירתם לא ידועה</label>
 </div>
-<div class="rightdiv">
-    <h1>GeeksforGeeks</h1>
-    <p>How many times were you frustrated while looking out
-        for a good collection of programming/algorithm/interview
-        questions? What did you expect and what did you get?
-        This portal has been created to provide well written,
-        well thought and well-explained solutions for selected questions.
-    </p>
-    <h2>GeeksforGeeks</h2>
-    <p>GCET is an entrance test for the extensive classroom programme
-        by GeeksforGeeks to build and enhance Data Structures and Algorithm
-        concepts, mentored by Sandeep Jain (Founder & CEO, GeeksforGeeks).
-        He has 7 years of teaching experience and 6 years of industry experience.
-    </p>
+<div class="rightdiv" id="songdata">
 </div>
 </body>
 </html>
