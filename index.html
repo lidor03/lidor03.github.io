@@ -125,10 +125,10 @@ input:checked + .slider:before {
   checkbox.addEventListener('change', function () {
     if (checkbox.checked) {
       // do this
-      alert('Checked');
+      addZeroPlacesToMap();
     } else {
       // do that
-      alert('Not checked');
+      remove_zero_points();
     }
   });
 });
@@ -141,7 +141,19 @@ input:checked + .slider:before {
                 if(json[keys[i]]["year"] >= lower && json[keys[i]]["year"] <= upper){
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
-                        add_map_point(places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
+                        add_map_point(places[j]["year"],places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
+                    }
+                }
+            }
+        }
+
+        function addZeroPlacesToMap (){
+            var keys = Object.keys(json);
+            for (var i = 0; i < keys.length; i++) {
+                if(json[keys[i]]["year"] == 0){
+                    var places = json[keys[i]]["places"];
+                    for (var j = 0; j < places.length; j++){
+                        add_map_point(places[j]["year"],places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
                     }
                 }
             }
@@ -149,11 +161,36 @@ input:checked + .slider:before {
         function remove_all_points() {
             var features = map.getLayers();
             var i = 1;
+            var item;
             features.forEach((feature) =>{
                 if(i==features.getLength()){
                     return;
                 }
-                features.pop().getSource().clear();
+                item = features.pop();
+                if(item.get("year") == 0){
+                    features.push(item);
+                }
+                else{
+                    item.getSource().clear();
+                }
+            });
+        }
+
+        function remove_zero_points() {
+            var features = map.getLayers();
+            var i = 1;
+            var item;
+            features.forEach((feature) =>{
+                if(i==features.getLength()){
+                    return;
+                }
+                item = features.pop();
+                if(item.get("year") == 0){
+                    item.getSource().clear();
+                }
+                else{
+                    features.push(item);
+                }
             });
         }
         /* OSM & OL example code provided by https://mediarealm.com.au/ */
@@ -188,13 +225,14 @@ input:checked + .slider:before {
                 }
             });
         }
-        function add_map_point(place, lat, lng) {
+        function add_map_point(year,place, lat, lng) {
             vectorLayer = new ol.layer.Vector({
                 source:new ol.source.Vector({
                     features: [new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)],
                             'EPSG:4326', 'EPSG:3857')),
                         place: place,
+                        year: year,
                     })]
                 }),
                 style: new ol.style.Style({
