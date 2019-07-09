@@ -203,6 +203,8 @@
                     feature.getSource().clear();
                 }
             }
+            var checkbox = document.querySelector('input[type="checkbox"]');
+            checkbox.checked=false;
         }
         function remove_all_points() {
             var features = map.getLayers();
@@ -347,12 +349,12 @@
         <div id="slider-range"></div>
     </div>
     <label class="switch">
-        <input type="checkbox" id="checkbox">
+        <input type="checkbox">
         <span class="slider round"></span>
     </label>
     <label>שירים ששנת יצירתם לא ידועה</label>
     <div style="float:right;"><a id="myLink" title="Click to do something"
- href="#" onclick="clear_map();document.getElementById("checkbox").checked = false;return false;">ניקוי מפה</a>
+ href="#" onclick="clear_map();return false;">ניקוי מפה</a>
 </div>
 </div>
 <div class="rightdiv" id="songdata" style="text-align: right" dir="rtl">
