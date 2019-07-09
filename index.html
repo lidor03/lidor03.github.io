@@ -185,7 +185,7 @@ input:checked + .slider:before {
                     return;
                 }
                 item = features.pop();
-                if(item.get("year") == 0){
+                if(item.getSource().get("year") == 0){
                     item.getSource().clear();
                 }
                 else{
