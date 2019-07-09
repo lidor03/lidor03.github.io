@@ -202,25 +202,36 @@
             var i = 1;
             var item;
             features.forEach((feature) =>{
-               if(feature && features.item(0)!==feature && feature.getSource().getFeatures()[0].get("year") !== 0){
-                    features.remove(feature);
-                    feature.getSource().clear();
+                if(i == features.getLength()){
+                    return;
+                }
+                item = features.pop();
+                if(item.getSource().getFeatures()[0].get("year") == 0){
+                    features.push(item);
+                }
+                else{
+                    item.getSource().clear();
                 }
             });
         }
-
         function removeZeroPoints() {
             var features = map.getLayers();
             var i = 1;
             var item;
             features.forEach((feature) =>{
-                if(feature && features.item(0)!==feature && feature.getSource().getFeatures()[0].get("year") == 0){
-                    features.remove(feature);
-                    feature.getSource().clear();
+                if(i == features.getLength()){
+                    return;
+                }
+                item = features.pop();
+                if(item.getSource().getFeatures()[0].get("year") == 0){
+                    item.getSource().clear();
+                }
+                else{
+                    features.push(item);
                 }
             });
         }
-        /* OSM & OL example code provided by https://mediarealm.com.au/ */
+
         jQuery.getJSON("places_with_data_and_lon_lat.json");
         var map;
         var last;
@@ -252,12 +263,23 @@
                     var albumPhoto = iconFeatureA[0].get("albumPhoto");
                     var year = iconFeatureA[0].get("year");
                     var preview_url = iconFeatureA[0].get("preview_url");
-                    var otherPlaces = iconFeatureA[0].get("otherPlaces").toString();
+                    var otherPlaces = iconFeatureA[0].get("otherPlaces");
+                    var otherPlacesStr = "";
+                    var otherPlacesLength = otherPlaces.length;
+                    if (otherPlaces > 0){
+                        for (var i = 0; i < otherPlacesLength - 1; i++){
+                            otherPlacesStr = otherPlaces[i].toString() + ", ";
+                        }
+                        otherPlacesStr += otherPlaces[otherPlacesLength - 1];
+                    }
+                    else{
+                        otherPlacesStr = "אין מקומות נוספים.";
+                    }
                     if (preview_url != null){
-                        alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + " " + otherPlaces);
+                        alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + " " + otherPlacesStr);
                     }
                     else {
-                        alert(songName + " " + artist + " " + place + " " + year  + " " + otherPlaces);
+                        alert(songName + " " + artist + " " + place + " " + year  + " " + otherPlacesStr);
                     }
                     e.preventDefault(); // avoid bubbling
                 }
