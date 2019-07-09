@@ -273,15 +273,16 @@
                         + "<b> מקום: </b>" + place + "</br>" + "<b> מקומות נוספים המוזכרים בשיר: </b>" + otherPlacesStr
                         + "</br>" + "<b> שנת פרסום: </b>";
                     year == 0 ? htmlStr += "לא ידועה" : htmlStr+= year;
-                    htmlStr += "</br>" + "<b> האזנה לקדימון: </b>";
+                    
+                    htmlStr += "</br><div><div style='text-align:center;'>" + "האזנה לקדימון: </div>";
                     if (preview_url != null){
-                        htmlStr += "  <audio controls=\"controls\">\n" +
+                        htmlStr += "  <div><audio controls=\"controls\">\n" +
                             "    <source src=\"" + preview_url + "\"/>\n" +
-                            "  </audio>"
+                            "  </audio></div></div>"
                         document.getElementById("songdata").innerHTML = htmlStr;
                     }
                     else {
-                        htmlStr += "קדימון אינו זמין.";
+                        htmlStr += "<div>קדימון אינו זמין.</div></div>";
                         document.getElementById("songdata").innerHTML = htmlStr;
                     }
                     e.preventDefault(); // avoid bubbling
