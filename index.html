@@ -264,10 +264,11 @@
                         otherPlacesStr = "אין מקומות נוספים.";
                     }
                     if (preview_url != null){
-                        document.getElementById("songdata").innerHTML = "Atsis!";
+                        document.getElementById("songdata").innerHTML = "<b> שם האמן: </b>" + artist;
                         alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + " " + otherPlacesStr);
                     }
                     else {
+                        document.getElementById("songdata").innerHTML = "<b> שם האמן: </b>" + artist;
                         alert(songName + " " + artist + " " + place + " " + year  + " " + otherPlacesStr);
                     }
                     e.preventDefault(); // avoid bubbling
