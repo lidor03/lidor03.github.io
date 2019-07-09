@@ -21,7 +21,7 @@
             {paramOne : 1, paramX : 'abc'},
             function(data) {
                 jsonfile = (' ' + JSON.stringify(data)).slice(1);
-                json = JSON.parse(jsonfile[0]);
+                json = JSON.parse(jsonfile);
                 google.charts.load('current', {'packages':['corechart']});
                 google.charts.setOnLoadCallback(drawChart);
             }
@@ -35,7 +35,7 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
-        alert(JSON.stringify(json));
+        alert(JSON.stringify(json[0]));
         data.addRows([
           ['Mushrooms', 3],
           ['Onions', 1],
