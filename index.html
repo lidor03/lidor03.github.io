@@ -202,15 +202,8 @@
             var i = 1;
             var item;
             features.forEach((feature) =>{
-                if(i == features.getLength()){
-                    return;
-                }
-                item = features.pop();
-                if(item.getSource().getFeatures()[0].get("year") == 0){
-                    features.push(item);
-                }
-                else{
-                    item.getSource().clear();
+               if(feature && features.item(0)!==feature && feature.getSource().getFeatures().getLength()>0 && feature.getSource().getFeatures()[0].get("year") !== 0){
+                    feature.getSource().clear();
                 }
             });
         }
@@ -219,15 +212,8 @@
             var i = 1;
             var item;
             features.forEach((feature) =>{
-                if(i == features.getLength()){
-                    return;
-                }
-                item = features.pop();
-                if(item.getSource().getFeatures()[0].get("year") == 0){
-                    item.getSource().clear();
-                }
-                else{
-                    features.push(item);
+                if(feature && features.item(0)!==feature && feature.getSource().getFeatures().getLength()>0 && feature.getSource().getFeatures()[0].get("year") == 0){
+                    feature.getSource().clear();
                 }
             });
         }
