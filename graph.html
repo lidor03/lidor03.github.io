@@ -96,7 +96,8 @@
             // Set chart options
             var options = {'title':'10 הערים הכי מוזכרות בשנים ' + lower + "-" + upper,
                 'width':800,
-                'height':600};
+                'height':600,
+                'rtlTable': true};
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
@@ -107,6 +108,6 @@
 
 <body>
 <!--Div that will hold the pie chart-->
-<div id="chart_div" dir = rtl></div>
+<div id="chart_div"></div>
 </body>
 </html>
