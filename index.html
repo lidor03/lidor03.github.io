@@ -65,6 +65,13 @@
           input:checked + .slider {
             background-color: #2196F3;
           }
+                    .slider.round {
+              border-radius: 34px;
+            }
+
+            .slider.round:before {
+              border-radius: 50%;
+            }
       </style> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
@@ -204,7 +211,7 @@
     </div>
 <label class="switch">
   <input type="checkbox">
-  <div class="slider round"></div>
+  <span class="slider round"></span>
 </label>
 <label>שירים ששנת יצירתם לא ידועה</label>
       </div> 
