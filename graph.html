@@ -28,6 +28,23 @@
         );
     </script>
     <script>
+      function atsis(){
+       let array = [];
+        year = 2008;
+        for(var i=0; i<json.length; i++){
+          if(json[i]["year"]==year){
+            array.push([json[i]["place"],json[i]["Occurrences"]]);
+          }
+        }
+        array.sort(function(a,b){
+         if(a[1]<b[1])
+           return 1;
+          if(a[1]<b[1])
+           return -1;
+          else return 0;
+        });
+        return array.slice(0,10) 
+      }
     
       function drawChart() {
 
@@ -36,12 +53,13 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         alert(JSON.stringify(json[0]));
+        var arr = atsis();
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+          arr[0],
+          arr[1],
+          arr[2],
+          arr[3],
+          arr[4]
         ]);
 
         // Set chart options
