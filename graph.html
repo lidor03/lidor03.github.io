@@ -15,6 +15,8 @@
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
 
     <script type="text/javascript" charset="utf-8">
+        var isjson = false;
+      var isyear = false;
         var jsonfile;
         $.get(
             "csvjson.json",
@@ -22,12 +24,36 @@
             function(data) {
                 jsonfile = (' ' + JSON.stringify(data)).slice(1);
                 json = JSON.parse(jsonfile);
+                isjson = true;
                 google.charts.load('current', {'packages':['corechart']});
                 google.charts.setOnLoadCallback(drawChart);
             }
         );
     </script>
     <script>
+         var lower;
+        var upper;
+      $( function() {
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 1934,
+                max: 2019,
+                values: [ 1934, 2019 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ] );
+                },
+                stop: function( event, ui ) {
+                    $( "#amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ] );
+                    lower = ui.values[ 0 ];
+                    upper = ui.values[ 1 ];
+                    isyear = true;
+                    drawChart();
+                }
+            });
+            $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +"-"+
+                $( "#slider-range" ).slider( "values", 1 ) );
+        } );
+        
         function getOccurrencesByYears(lower, upper){
             let array = [];
             for(var i=0; i<json.length; i++){
@@ -85,7 +111,7 @@
         }
 
         function drawChart() {
-            var lower = 2008, upper = 2010;
+            if(isjson == false || isyear==false) return;
             // Create the data table.
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'שם המקום');
@@ -109,5 +135,10 @@
 <body>
 <!--Div that will hold the pie chart-->
 <div id="chart_div"></div>
+   <p align="center" dir=rtl>
+            <label for="amount">טווח שנים:</label>
+            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold; width:35%">
+        </p>
+        <div id="slider-range"></div>
 </body>
 </html>
