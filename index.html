@@ -250,9 +250,13 @@
                     var otherPlacesLength = otherPlaces.length;
                     if (otherPlacesLength > 0){
                         for (var i = 0; i < otherPlacesLength - 1; i++){
-                            otherPlacesStr = JSON.stringify(otherPlaces[i]["place"]) + ", ";
+                            var str = JSON.stringify(otherPlaces[i]["place"]);
+                            str = str.substring(1, str.length - 1);
+                            otherPlacesStr += str + ", ";
                         }
-                        otherPlacesStr += JSON.stringify(otherPlaces[otherPlacesLength - 1]["place"]);
+                        var str = JSON.stringify(otherPlaces[otherPlacesLength - 1]["place"]);
+                        str = str.substring(1, str.length - 1);
+                        otherPlacesStr += str;
                     }
                     else{
                         otherPlacesStr = "אין מקומות נוספים.";
