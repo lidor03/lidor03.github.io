@@ -90,7 +90,8 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'שם המקום');
             data.addColumn('number', 'כמות מופעים');
-            var arr = getOccurrencesByYears(lower, upper);
+            // var arr = getOccurrencesByYears(lower, upper);
+            var arr = getOccurrencesAllYears();
             data.addRows(arr);
 
             // Set chart options
