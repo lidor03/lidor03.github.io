@@ -23,6 +23,8 @@
             {paramOne : 1, paramX : 'abc'},
             function(data) {
                 jsonfile = (' ' + JSON.stringify(data)).slice(1);
+                lower=1934;
+                upper = 2019;
                 json = JSON.parse(jsonfile);
                 isjson = true;
                 google.charts.load('current', {'packages':['corechart']});
@@ -111,7 +113,7 @@
         }
 
         function drawChart() {
-            if(isjson == false || isyear==false) return;
+            if(isjson == false) return;
             // Create the data table.
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'שם המקום');
