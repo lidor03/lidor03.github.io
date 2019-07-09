@@ -202,6 +202,7 @@
             features.forEach((feature) =>{
                 if(feature && features.item(0)!==feature && feature.getSource().getFeatures().length>0 && feature.getSource().getFeatures()[0].get("year") !== 0){
                     feature.getSource().clear();
+                    features.remove(feature);
                 }
             });
         }
@@ -210,6 +211,7 @@
             features.forEach((feature) =>{
                 if(feature && features.item(0)!==feature && feature.getSource().getFeatures().length>0 && feature.getSource().getFeatures()[0].get("year") == 0){
                     feature.getSource().clear();
+                    features.remove(feature);
                 }
             });
         }
