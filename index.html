@@ -201,20 +201,20 @@
             var features = map.getLayers();
             for (var k = 1; k < features.getLength(); k++){
                 feature = features.get(k);
-                            if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
+                if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
                     && feature.getSource().getFeatures()[0].get("year") !== 0){
                     feature.getSource().clear();
-                            }
+                }
             }
         }
         function removeZeroPoints() {
             var features = map.getLayers();
             for (var k = 1; k < features.getLength(); k++){
                 feature = features.get(k);
-                            if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
+                if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
                     && feature.getSource().getFeatures()[0].get("year") == 0){
                     feature.getSource().clear();
-                            }
+                }
             }
         }
 
@@ -265,14 +265,17 @@
                     else{
                         otherPlacesStr = "אין מקומות נוספים.";
                     }
+                    var htmlStr = " <img src=\"" + albumPhoto + "\" alt=\"תמונת האלבום\">" + "</br>" +
+                        "<b> שם האמן: </b>" + artist + "</br>"
+                        + "<b> שם השיר: </b>" + songName + "</br>"
+                        + "<b> מקום: </b>" + place + "</br>" + "<b> מקומות נוספים המוזכרים בשיר: </b>" + otherPlacesStr
+                        + "</br>";
                     if (preview_url != null){
-                        document.getElementById("songdata").innerHTML = "<b> שם האמן: </b>" + artist + "</br>" 
-                                                                        + "<b> שם השיר: </b>" + songName + "</br>";
+                        document.getElementById("songdata").innerHTML = htmlStr;
                         alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + " " + otherPlacesStr);
                     }
                     else {
-                        document.getElementById("songdata").innerHTML = "<b> שם האמן: </b>" + artist + "</br>"
-                            + "<b> שם השיר: </b>" + songName + "</br>";
+                        document.getElementById("songdata").innerHTML = htmlStr;
                         alert(songName + " " + artist + " " + place + " " + year  + " " + otherPlacesStr);
                     }
                     e.preventDefault(); // avoid bubbling
