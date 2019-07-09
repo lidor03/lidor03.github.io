@@ -274,11 +274,11 @@
                         + "</br>" + "<b> שנת פרסום: </b>";
                     year == 0 ? htmlStr += "לא ידועה" : htmlStr+= year;
                     
-                    htmlStr += "</br><div><div style='text-align:center; width:20%; float:right;'>" + "האזנה לקדימון: </div>";
+                    htmlStr += "</br><div style='text-align:center; width:60%; float:right;'>" + "האזנה לקדימון:";
                     if (preview_url != null){
-                        htmlStr += "  <div style='float:right; width:50%;'><audio controls=\"controls\">\n" +
+                        htmlStr += " <audio controls=\"controls\">\n" +
                             "    <source src=\"" + preview_url + "\"/>\n" +
-                            "  </audio></div></div>"
+                            "  </audio></div>"
                         document.getElementById("songdata").innerHTML = htmlStr;
                     }
                     else {
