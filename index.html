@@ -30,6 +30,9 @@
                 min: 1934,
                 max: 2019,
                 values: [ 1934, 2019 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ] );
+                },
                 stop: function( event, ui ) {
                     $( "#amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ] );
                     if (jsonfile == undefined){
