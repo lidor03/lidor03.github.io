@@ -21,7 +21,7 @@
             {paramOne : 1, paramX : 'abc'},
             function(data) {
                 jsonfile = (' ' + JSON.stringify(data)).slice(1);
-                json = JSON.parse(jsonfile);
+                json = JSON.parse(jsonfile[0]);
                 google.charts.load('current', {'packages':['corechart']});
                 google.charts.setOnLoadCallback(drawChart);
             }
