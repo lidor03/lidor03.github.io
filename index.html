@@ -202,7 +202,7 @@
             var i = 1;
             var item;
             features.forEach((feature) =>{
-               if(feature && features.item(0)!==feature && feature.getSource().getFeatures().getLength()>0 && feature.getSource().getFeatures()[0].get("year") !== 0){
+                if(feature && features.item(0)!==feature && feature.getSource().getFeatures().getLength()>0 && feature.getSource().getFeatures()[0].get("year") !== 0){
                     feature.getSource().clear();
                 }
             });
@@ -252,7 +252,7 @@
                     var otherPlaces = iconFeatureA[0].get("otherPlaces");
                     var otherPlacesStr = "";
                     var otherPlacesLength = otherPlaces.length;
-                    if (otherPlaces > 0){
+                    if (otherPlacesLength > 0){
                         for (var i = 0; i < otherPlacesLength - 1; i++){
                             otherPlacesStr = otherPlaces[i].toString() + ", ";
                         }
