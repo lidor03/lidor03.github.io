@@ -52,6 +52,10 @@
                     return -1;
                 else return 0;
             });
+            var arrayLength = array.length;
+            if (arrayLength < 10){
+                return array.slice(0, arrayLength);
+            }
             return array.slice(0,10)
         }
 
@@ -79,18 +83,18 @@
             });
             return array.slice(0,10)
         }
-        
-        function drawChart() {
 
+        function drawChart() {
+            var lower = 2008, upper = 2010;
             // Create the data table.
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Topping');
-            data.addColumn('number', 'Slices');
-            var arr = getOccurrencesByYears(2008, 2010);
+            data.addColumn('string', 'שם המקום');
+            data.addColumn('number', 'כמות מופעים');
+            var arr = getOccurrencesByYears(lower, upper);
             data.addRows(arr);
 
             // Set chart options
-            var options = {'title':'How Much Pizza I Ate Last Night',
+            var options = {'title':'10 הערים הכי מוזכרות בשנים' + lower + "-" + upper,
                 'width':800,
                 'height':600};
 
