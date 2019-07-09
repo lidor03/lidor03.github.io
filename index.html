@@ -195,7 +195,6 @@
                 }
                 if(features.item(0)!==feature && feature.getSource().getFeatures()[0].get("year") !== 0){
                     feature.getSource().clear();
-                    features.remove(feature);   
                 }
             });
         }
@@ -209,8 +208,7 @@
                     return;
                 }
                 if(features.item(0)!==feature && feature.getSource().getFeatures()[0].get("year") == 0){
-                    feature.getSource().clear();
-                    features.remove(feature);   
+                    feature.getSource().clear(); 
                 }
             });
         }
