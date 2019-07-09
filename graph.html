@@ -53,13 +53,7 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         var arr = atsis();
-        data.addRows([
-          arr[0],
-          arr[1],
-          arr[2],
-          arr[3],
-          arr[4]
-        ]);
+        data.addRows(arr);
 
         // Set chart options
         var options = {'title':'How Much Pizza I Ate Last Night',
