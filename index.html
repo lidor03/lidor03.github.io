@@ -153,8 +153,10 @@
                 if(year >= lower && year <= upper){
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
+                        var otherPlaces = places.copy();
+                        otherPlaces.removeItem(j);
                         add_map_point(artist, songName, albumPhoto, preview_url, year,
-                            places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
+                            places[j]["place"], places[j]["latitude"], places[j]["longitude"], otherPlaces);
                     }
                 }
             }
@@ -179,8 +181,10 @@
                     }
                     var places = json[keys[i]]["places"];
                     for (var j = 0; j < places.length; j++){
+                        var otherPlaces = places.copy();
+                        otherPlaces.removeItem(j);
                         add_map_point(artist, songName, albumPhoto, preview_url, json[keys[i]]["year"],
-                            places[j]["place"], places[j]["latitude"], places[j]["longitude"]);
+                            places[j]["place"], places[j]["latitude"], places[j]["longitude"], otherPlaces);
                     }
                 }
             }
@@ -193,8 +197,12 @@
                 if(i == features.getLength()){
                     return;
                 }
-                if(features.item(0)!==feature && feature.getSource().getFeatures()[0].get("year") !== 0){
-                    feature.getSource().clear();
+                item = features.pop();
+                if(item.getSource().getFeatures()[0].get("year") == 0){
+                    features.push(item);
+                }
+                else{
+                    item.getSource().clear();
                 }
             });
         }
@@ -207,8 +215,12 @@
                 if(i == features.getLength()){
                     return;
                 }
-                if(features.item(0)!==feature && feature.getSource().getFeatures()[0].get("year") == 0){
-                    feature.getSource().clear(); 
+                item = features.pop();
+                if(item.getSource().getFeatures()[0].get("year") == 0){
+                    item.getSource().clear();
+                }
+                else{
+                    features.push(item);
                 }
             });
         }
@@ -239,12 +251,24 @@
                 var iconFeatureA = map.getFeaturesAtPixel(e.pixel);
                 if (iconFeatureA !== null && iconFeatureA[0].getKeys().includes("place")) {
                     var place = iconFeatureA[0].get("place");
-                    alert(place);
+                    var artist = iconFeatureA[0].get("artist");
+                    var songName = iconFeatureA[0].get("songName");
+                    var albumPhoto = iconFeatureA[0].get("albumPhoto");
+                    var year = iconFeatureA[0].get("year");
+                    var preview_url = iconFeatureA[0].get("preview_url");
+                    var otherPlaces = iconFeatureA[0].get("otherPlaces");
+                    if (preview_url != null){
+                        alert(songName + " " + artist + " " + place + " " + year + " " + preview_url + 
+                            " " + otherPlaces.toString());
+                    }
+                    else {
+                        alert(songName + " " + artist + " " + place + " " + year + " " + otherPlaces.toString());
+                    }
                     e.preventDefault(); // avoid bubbling
                 }
             });
         }
-        function add_map_point(artist, songName, albumPhoto, preview_url, year, place, lat, lng) {
+        function add_map_point(artist, songName, albumPhoto, preview_url, year, place, lat, lng, otherPlaces) {
             vectorLayer = new ol.layer.Vector({
                 source:new ol.source.Vector({
                     features: [new ol.Feature({
@@ -255,6 +279,7 @@
                         albumPhoto: albumPhoto,
                         preview_url: preview_url,
                         place: place,
+                        otherPlaces: otherPlaces,
                         year: year,
                     })]
                 }),
