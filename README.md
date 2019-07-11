@@ -14,7 +14,7 @@ In order to run the project You need:
 
 1.  Download the files from github.
 
-2.  Create folder for with two sub folders: Project and tagger (please note that It's important to follow the names, since the code is key sensitive).
+2.  Create folder for with two sub folders: Project and tagger (please note that It's important to follow the names, since the code is key sensitive). Copy the python files from code/python into Project.
 
 3.  All the python files need to be placed in Project, Dr. Meni Adler tagger will be placed in tagger folder.
 
