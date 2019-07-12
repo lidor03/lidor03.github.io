@@ -154,7 +154,10 @@ def get_data_for_songs(json_dictionary):
             with open("places_with_data.json", 'w', encoding='utf-8') as json_file:
                 json.dump(json_dictionary, json_file, ensure_ascii=False, indent=4)
             json_file.close()
-
+        with open("places_with_data.json", 'w', encoding='utf-8') as json_file:
+            json.dump(json_dictionary, json_file, ensure_ascii=False, indent=4)
+        json_file.close()
+        
 
 def main():
     get_data_for_songs(get_artist_id_spotify(get_artist_name(create_dictionary_from_json())))
