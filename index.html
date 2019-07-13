@@ -335,14 +335,18 @@
                 json = JSON.parse(jsonfile);
                 initialize_map();
                 addPlacesToMap (1934, 2019);
+                $( "#mytitle" ).val(1934 + "-" + 2019 );
             }
         );
     </script>
 </head>
 <body>
+    <h1 id="mytitle"></h1>
+    
 
 <div class="leftdiv" dir="rtl">
-    <div id="map" style="height: 650px;"></div>
+    <div id="map" style="height: 650px;">
+    </div>
     
     
     <div style="float:right;"><a id="myLink" title="Click to do something"
