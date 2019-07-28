@@ -109,7 +109,7 @@
                         return;
                     }
                     else{
-                      //  remove_all_points();
+                        remove_all_points();
                         addpoints(ui.values[0], ui.values[1]);
                     }
                 }
@@ -121,7 +121,7 @@
             var checkbox = document.querySelector('input[type="checkbox"]');
             checkbox.addEventListener('change', function () {
                 if (checkbox.checked) {
-                    addZeroPlacesToMap();
+                    addpoints(0,0);
                 } else {
                     removeZeroPoints();
                 }
@@ -131,7 +131,7 @@
     <script>
         var json;
         function addpoints(lower,upper){
-            document.getElementById("mytitle").innerHTML ="<u><b>" + "תצוגה גאוגרפית של המקומות המוזכרים בשירים בין השנים " + lower + "-" + upper+"</b></u>";
+            if(lower !== 0) document.getElementById("mytitle").innerHTML ="<u><b>" + "תצוגה גאוגרפית של המקומות המוזכרים בשירים בין השנים " + lower + "-" + upper+"</b></u>";
             var features = map.getLayers();
             var feature;
             alert("here!");
@@ -212,7 +212,7 @@
             var feature;
             for (var k = 1; k < features.getLength(); k++){
                 feature = features.item(k);
-                if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0){
+                if(feature && features.item(0) !== feature){
                     feature.setVisible(false);
                 }
             }
@@ -224,7 +224,7 @@
             var feature;
             for (var k = 1; k < features.getLength(); k++){
                 feature = features.item(k);
-                if(feature && features.item(0) !== feature  && feature.getSource().getFeatures()[0].get("year") !== 0){
+                if(feature && features.item(0) !== feature  && feature.get("year") !== 0){
                     feature.setVisible(false);
                 }
             }
@@ -234,8 +234,7 @@
             var feature;
             for (var k = 1; k < features.getLength(); k++){
                 feature = features.item(k);
-                if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
-                    && feature.getSource().getFeatures()[0].get("year") == 0){
+                if(feature && features.item(0) !== feature && feature.get("year") == 0){
                     feature.setVisible(false);
                 }
             }
