@@ -134,7 +134,6 @@
             if(lower !== 0) document.getElementById("mytitle").innerHTML ="<u><b>" + "תצוגה גאוגרפית של המקומות המוזכרים בשירים בין השנים " + lower + "-" + upper+"</b></u>";
             var features = map.getLayers();
             var feature;
-            alert("here!");
             for (var k = 1; k < features.getLength(); k++){
                 feature = features.item(k);
                 if(feature && features.item(0) !== feature  && feature.get("year") >= lower && feature.get("year") <= upper){
@@ -404,7 +403,7 @@
                 json = JSON.parse(jsonfile);
                 initialize_map();
                 createDict();
-               // addPlacesToMap (1934, 2019);
+                addpoints (1934, 2019);
             }
         );
     </script>
