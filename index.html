@@ -110,7 +110,7 @@
                     }
                     else{
                         remove_all_points();
-                        addPlacesToMap(ui.values[0], ui.values[1]);
+                        addpoints(ui.values[0], ui.values[1]);
                     }
                 }
             });
@@ -130,8 +130,20 @@
     </script>
     <script>
         var json;
-        function addPlacesToMap (lower, upper){
+        function addpoints(lower,upper){
             document.getElementById("mytitle").innerHTML ="<u><b>" + "תצוגה גאוגרפית של המקומות המוזכרים בשירים בין השנים " + lower + "-" + upper+"</b></u>";
+            var features = map.getLayers();
+            var feature;
+            for (var k = 1; k < features.getLength(); k++){
+                feature = features.item(k);
+                if(feature && features.item(0) !== feature  && feature.get("year") >= lower && feature.get("year") <= upper){
+                    feature.setVisible(true);
+                }
+            }
+        }
+
+        function addPlacesToMap (lower, upper){
+            
             var keys = Object.keys(json);
             for (var i = 0; i < keys.length; i++) {
                 var year = json[keys[i]]["year"];
@@ -200,7 +212,7 @@
             for (var k = 1; k < features.getLength(); k++){
                 feature = features.item(k);
                 if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0){
-                    feature.getSource().clear();
+                    feature.setVisible(false);
                 }
             }
             var checkbox = document.querySelector('input[type="checkbox"]');
@@ -211,9 +223,8 @@
             var feature;
             for (var k = 1; k < features.getLength(); k++){
                 feature = features.item(k);
-                if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
-                    && feature.getSource().getFeatures()[0].get("year") !== 0){
-                    feature.getSource().clear();
+                if(feature && features.item(0) !== feature  && feature.getSource().getFeatures()[0].get("year") !== 0){
+                    feature.setVisible(false);
                 }
             }
         }
@@ -224,7 +235,7 @@
                 feature = features.item(k);
                 if(feature && features.item(0) !== feature && feature.getSource().getFeatures().length > 0
                     && feature.getSource().getFeatures()[0].get("year") == 0){
-                    feature.getSource().clear();
+                    feature.setVisible(false);
                 }
             }
         }
@@ -242,7 +253,7 @@
 		title: ''+year,
         year: year,
 		openInLayerSwitcher: false,
-		visible: true,
+		visible: false,
 		layers:dict[''+year]
         });
         map.addLayer(Group1);
