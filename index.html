@@ -157,7 +157,7 @@
                                 otherPlaces.push(places[k]);
                             }
                         }
-                        add_map_point(artist, songName, albumPhoto, preview_url, year,
+                        add_point_to_dict(artist, songName, albumPhoto, preview_url, year,
                             places[j]["place"], places[j]["latitude"], places[j]["longitude"], otherPlaces);
                     }
                 }
@@ -188,7 +188,7 @@
                                 otherPlaces.push(places[k]);
                             }
                         }
-                        add_map_point(artist, songName, albumPhoto, preview_url, json[keys[i]]["year"],
+                        add_point_to_dict(artist, songName, albumPhoto, preview_url, json[keys[i]]["year"],
                             places[j]["place"], places[j]["latitude"], places[j]["longitude"], otherPlaces);
                     }
                 }
@@ -236,12 +236,14 @@
         var mapLng = 34.7816055;
         var mapDefaultZoom = 7.5;
         var Group1;
-        function makegroup(){
+
+        function makegroup(year){
         Group1 = new ol.layer.Group({
-		title: 'Group1',
+		title: ''+year,
+        year: year,
 		openInLayerSwitcher: false,
 		visible: true,
-		layers:dict['0']
+		layers:dict[''+year]
         });
         map.addLayer(Group1);
         }
@@ -310,7 +312,37 @@
             });
         }
         function add_map_point(artist, songName, albumPhoto, preview_url, year, place, lat, lng, otherPlaces) {
-            dict['0'].push( vectorLayer = new ol.layer.Vector({
+            dict[''+year].push( vectorLayer = new ol.layer.Vector({
+                source:new ol.source.Vector({
+                    features: [new ol.Feature({
+                        geometry: new ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)],
+                            'EPSG:4326', 'EPSG:3857')),
+                        artist: artist,
+                        songName: songName,
+                        albumPhoto: albumPhoto,
+                        preview_url: preview_url,
+                        place: place,
+                        otherPlaces: otherPlaces,
+                        year: year,
+                    })]
+                }),
+                style: new ol.style.Style({
+                    image: new ol.style.Icon({
+                        anchor: [0.5, 0.5],
+                        anchorXUnits: "fraction",
+                        anchorYUnits: "fraction",
+                        src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg",
+                        // the scale factor
+                        scale: 0.6
+                    })
+                })
+            }));
+            //map.addLayer(vectorLayer);
+        }
+
+
+         function add_point_to_dict(artist, songName, albumPhoto, preview_url, year, place, lat, lng, otherPlaces) {
+            dict[''+year].push( vectorLayer = new ol.layer.Vector({
                 source:new ol.source.Vector({
                     features: [new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)],
@@ -340,6 +372,15 @@
         var dict = {};
         function createDict(){
             dict['0']=new ol.Collection([]);
+            addZeroPlacesToMap();
+            makegroup(0);
+            for (var i=1934; i<=2019; i++){
+                dict[''+i] = new ol.Collection([]);
+            }
+            addPlacesToMap (1934, 2019);
+            for (var j=1934; j<=2019; j++){
+                makegroup(j);
+            }
         }
     </script>
     <script type="text/javascript" charset="utf-8">
@@ -351,9 +392,7 @@
                 jsonfile = (' ' + JSON.stringify(data)).slice(1);
                 json = JSON.parse(jsonfile);
                 initialize_map();
-		createDict();
-                addZeroPlacesToMap();
-                makegroup();
+                createDict();
                // addPlacesToMap (1934, 2019);
             }
         );
