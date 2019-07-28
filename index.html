@@ -235,6 +235,18 @@
         var mapLat = 31.8110615;
         var mapLng = 34.7816055;
         var mapDefaultZoom = 7.5;
+        var Group1;
+        function makegroup(){
+        Group1 = new ol.layer.Group({
+		title: 'Group1',
+		openInLayerSwitcher: false,
+		visible: true,
+		layers:dict['0']
+        });
+        map.addLayer(Group1);
+        }
+        
+			
         function initialize_map() {
             map = new ol.Map({
                 target: "map",
@@ -298,7 +310,7 @@
             });
         }
         function add_map_point(artist, songName, albumPhoto, preview_url, year, place, lat, lng, otherPlaces) {
-            vectorLayer = new ol.layer.Vector({
+            dict['0'].push( vectorLayer = new ol.layer.Vector({
                 source:new ol.source.Vector({
                     features: [new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)],
@@ -322,8 +334,12 @@
                         scale: 0.6
                     })
                 })
-            });
-            map.addLayer(vectorLayer);
+            }));
+            //map.addLayer(vectorLayer);
+        }
+        var dict = {};
+        function createDict(){
+            dict['0']=new ol.Collection([]);
         }
     </script>
     <script type="text/javascript" charset="utf-8">
@@ -335,7 +351,9 @@
                 jsonfile = (' ' + JSON.stringify(data)).slice(1);
                 json = JSON.parse(jsonfile);
                 initialize_map();
-                addPlacesToMap (1934, 2019);
+                addZeroPlacesToMap();
+                makegroup();
+               // addPlacesToMap (1934, 2019);
             }
         );
     </script>
