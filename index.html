@@ -274,6 +274,7 @@
                     zoom: mapDefaultZoom
                 })
             });
+            
             map.on('click', function(e) {
                 var iconFeatureA = map.getFeaturesAtPixel(e.pixel);
                 if (iconFeatureA !== null && iconFeatureA[0].getKeys().includes("place")) {
@@ -416,8 +417,7 @@
 
 <div class="leftdiv" dir="rtl">
     <div id="mytitle" dir=rtl style="text-align:center;"></div>
-    <div id="map" style="height: 650px;">
-            <img src="35.gif">
+    <div id="map" style="height: 650px; background-image: url('35.gif');">
     </div>
     
     
